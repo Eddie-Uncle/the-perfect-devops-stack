@@ -1,0 +1,4 @@
+consul:
+  version: '0.8.3'
+  download_host: 'releases.hashicorp.com'
+  bin_dir: '/usr/local/bin'

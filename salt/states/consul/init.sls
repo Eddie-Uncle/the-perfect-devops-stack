@@ -1,0 +1,2 @@
+include:
+  - consul.install

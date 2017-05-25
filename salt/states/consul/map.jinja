@@ -1,0 +1,8 @@
+{% import_yaml 'consul/defaults.yaml' as consul_default_settings %}
+
+{% set consul = salt['pillar.get'](
+        'consul',
+        default=consul_default_settings.consul,
+        merge=True
+    )
+%}
