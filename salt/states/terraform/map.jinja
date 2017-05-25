@@ -1,0 +1,8 @@
+{% import_yaml 'terraform/defaults.yaml' as terraform_default_settings %}
+
+{% set terraform = salt['pillar.get'](
+        'terraform',
+        default=terraform_default_settings.terraform,
+        merge=True
+    )
+%}

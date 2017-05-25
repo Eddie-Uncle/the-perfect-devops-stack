@@ -1,0 +1,2 @@
+include:
+  - terraform.install
