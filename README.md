@@ -1,5 +1,7 @@
 # Perfect DevOps stack (hashicorp tools[terraform, nomad, consul] + saltstack + docker)
 
+### [WORK IN PROGRESS, STAY TUNE]
+
 ## Preparing the cluster head
 
 Create a new instance(Centos 7.2 - ami-0ca23e1b) that will serve as our cluster head for terraform, saltstack, nomad and consul
