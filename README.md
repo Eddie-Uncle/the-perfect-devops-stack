@@ -1,6 +1,6 @@
 # Perfect DevOps stack (hashicorp tools[terraform, nomad, consul] + saltstack + docker)
 
-### [WORK IN PROGRESS, STAY TUNE]
+### [WORK IN PROGRESS, STAY TUNED]
 
 ## Preparing the cluster head
 
