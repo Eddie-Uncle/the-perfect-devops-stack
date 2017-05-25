@@ -99,3 +99,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# pem
+*.pem
+
+# terraform states
+*.tfstate
+*.tfstate.backup
