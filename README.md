@@ -1,4 +1,4 @@
-# Perfect DevOps stack (hashicorp too[terraform, nomad, consul] + saltstack + docker)
+# Perfect DevOps stack (hashicorp tools[terraform, nomad, consul] + saltstack + docker)
 
 ## Preparing the cluster head
 
