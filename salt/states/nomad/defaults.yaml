@@ -1,4 +1,4 @@
-consul_template:
-  version: '0.18.5'
+nomad:
+  version: '0.5.6'
   download_host: 'releases.hashicorp.com'
   bin_dir: '/usr/local/bin'

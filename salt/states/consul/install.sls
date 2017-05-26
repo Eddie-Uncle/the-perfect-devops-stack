@@ -14,7 +14,7 @@ consul-download:
     - name: /tmp/consul_{{ consul.version }}_linux_amd64.zip
     - source: https://{{ consul.download_host }}/consul/{{ consul.version }}/consul_{{ consul.version }}_linux_amd64.zip
     - skip_verify: True
-    - unless: test -f {{ consul.bin_dir }}/consul_{{ consul.version }}
+    - unless: {{ consul.bin_dir }}/consul-{{ consul.version }} -v
 
 consul-extract:
   cmd.wait:
@@ -30,6 +30,7 @@ consul-install:
       - file: {{ consul.bin_dir }}
     - watch:
       - cmd: consul-extract
+    - unless: {{ consul.bin_dir }}/consul-{{ consul.version }} -v
 
 consul-postclean:
   file.absent:

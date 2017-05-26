@@ -1,0 +1,8 @@
+{% import_yaml 'nomad/defaults.yaml' as nomad_default_settings %}
+
+{% set nomad = salt['pillar.get'](
+        'nomad',
+        default=nomad_default_settings.nomad,
+        merge=True
+    )
+%}

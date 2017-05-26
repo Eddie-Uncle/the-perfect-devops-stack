@@ -14,7 +14,7 @@ terraform-download:
     - name: /tmp/terraform_{{ terraform.version }}_linux_amd64.zip
     - source: https://{{ terraform.download_host }}/terraform/{{ terraform.version }}/terraform_{{ terraform.version }}_linux_amd64.zip
     - skip_verify: True
-    - unless: test -f {{ terraform.bin_dir }}/terraform_{{ terraform.version }}
+    - unless: {{ terraform.bin_dir }}/terraform-{{ terraform.version }} -v
 
 terraform-extract:
   cmd.wait:
@@ -30,6 +30,7 @@ terraform-install:
       - file: {{ terraform.bin_dir }}
     - watch:
       - cmd: terraform-extract
+    - unless: {{ terraform.bin_dir }}/terraform-{{ terraform.version }} -v
 
 terraform-postclean:
   file.absent:

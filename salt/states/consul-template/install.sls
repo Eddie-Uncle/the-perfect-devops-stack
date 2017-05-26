@@ -1,45 +1,45 @@
-{% from "consul-template/map.jinja" import consul-template with context %}
+{% from "consul-template/map.jinja" import consul_template with context %}
 
-consul-template-dep-unzip:
+consul_template-dep-unzip:
   pkg.installed:
     - name: unzip
 
-consul-template-bin-dir:
+consul_template-bin-dir:
   file.directory:
-   - name: {{ consul-template.bin_dir }}
+   - name: {{ consul_template.bin_dir }}
    - makedirs: True
 
-consul-template-download:
+consul_template-download:
   file.managed:
-    - name: /tmp/consul-template_{{ consul-template.version }}_linux_amd64.zip
-    - source: https://{{ consul-template.download_host }}/consul-template/{{ consul-template.version }}/consul-template_{{ consul-template.version }}_linux_amd64.zip
+    - name: /tmp/consul_template_{{ consul_template.version }}_linux_amd64.zip
+    - source: https://{{ consul_template.download_host }}/consul-template/{{ consul_template.version }}/consul-template_{{ consul_template.version }}_linux_amd64.zip
     - skip_verify: True
-    - unless: test -f {{ consul-template.bin_dir }}/consul-template_{{ consul-template.version }}
-
-consul-template-extract:
+    - unless: {{ consul_template.bin_dir }}/consul-template-{{ consul_template.version }} -v
+consul_template-extract:
   cmd.wait:
-    - name: unzip /tmp/consul-template_{{ consul-template.version }}_linux_amd64.zip -d /tmp
+    - name: unzip /tmp/consul_template_{{ consul_template.version }}_linux_amd64.zip -d /tmp
     - watch:
-      - file: consul-template-download
+      - file: consul_template-download
 
-consul-template-install:
+consul_template-install:
   file.rename:
-    - name: {{ consul-template.bin_dir }}/consul-template-{{ consul-template.version }}
+    - name: {{ consul_template.bin_dir }}/consul-template-{{ consul_template.version }}
     - source: /tmp/consul-template
     - require:
-      - file: {{ consul-template.bin_dir }}
+      - file: {{ consul_template.bin_dir }}
     - watch:
-      - cmd: consul-template-extract
+      - cmd: consul_template-extract
+    - unless: {{ consul_template.bin_dir }}/consul-template-{{ consul_template.version }} -v
 
-consul-template-postclean:
+consul_template-postclean:
   file.absent:
-    - name: /tmp/consul-template_{{ consul-template.version }}_linux_amd64.zip
+    - name: /tmp/consul_template_{{ consul_template.version }}_linux_amd64.zip
     - watch:
-      - file: consul-template-install
+      - file: consul_template-install
 
-consul-template-symlink:
+consul_template-symlink:
   file.symlink:
-    - target: {{ consul-template.bin_dir }}/consul-template-{{ consul-template.version }}
-    - name: {{ consul-template.bin_dir }}/consul-template
+    - target: {{ consul_template.bin_dir }}/consul-template-{{ consul_template.version }}
+    - name: {{ consul_template.bin_dir }}/consul-template
     - watch:
-      - file: consul-template-install
+      - file: consul_template-install
