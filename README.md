@@ -2,17 +2,19 @@
 
 ### [WORK IN PROGRESS, STAY TUNED]
 
-## Preparing the cluster head
+## Preparing the STACK HEAD server
 
 Create a new instance(Centos 7.2 - ami-0ca23e1b) that will serve as our cluster head for terraform, saltstack, nomad and consul
 
 1) Set a hostname to the cluster head
 ````
-# echo 'clusterhead.local' > /etc/hostname
+# echo 'stackhead.local' > /etc/hostname
 
 # hostname $(cat /etc/hostname)
 
-# CLUSTER_HEAD_IP=$(ip -4 addr show dev eth0|grep inet | cut -d" " -f6|sed s/\\/.*//g)
+# STACK_HEAD_IP=$(ip -4 addr show dev eth0|grep inet | cut -d" " -f6|sed s/\\/.*//g)
+
+# echo "$STACK_HEAD_IP $HOSTNAME" >> /etc/hosts
 ````
 
 2) Clone the git repository
@@ -25,7 +27,10 @@ Create a new instance(Centos 7.2 - ami-0ca23e1b) that will serve as our cluster 
 
 3) Generate a key pair and save it to /opt/devops/hashicorpstack-aws-saltstack-docker/files/aws.pem
 ````
+# mkdir /opt/devops/hashicorpstack-aws-saltstack-docker/files
+
 AWS Console -> EC2 -> Key Pairs -> Create new Key Pair
+
 ````
 
 4) Generate a new access keys and set the values accordingly on the file /opt/devops/hashicorpstack-aws-saltstack-docker/terraform/terraform.tfvars
@@ -55,13 +60,55 @@ EOF
 
 # sed -i s/"#master: salt"/"master: $HOSTNAME"/g /etc/salt/minion
 
-# systemct start salt-master salt-minion
+# systemctl start salt-master salt-minion
 
-# systemct enable salt-master salt-minion
+# systemctl enable salt-master salt-minion
 
 ````
 
-6) [work in progress]
+6) Add role to the STACK_HEAD and restart the salt-minion
+````
+# cat << EOF > /etc/salt/grains
+role:
+  - stackhead
+EOF
+# systemctl restart salt-minion
+````
+
+7) Install hashicorp tools (consul, consul-template, nomad and terraform)
+````
+# salt -G 'role:stackhead' state.highstate
+````
+
+8) Terraform apply
+````
+# cd /opt/devops/hashicorpstack-aws-saltstack-docker/terraform
+
+# terraform apply
+````
+
+9) Ping if the instance is already connected to saltstack
+````
+# salt '*' test.ping
+````
+
+10) Assign role to all newly created instances and restart salt-minion
+````
+# salt -C '* not G@role:stackhead' file.write /etc/salt/grains "role:
+  - consul
+  - consul-template
+  - nomad
+"
+# salt -C '* not G@role:stackhead' service.restart salt-minion
+The command above will timeout, to test if the minion is up again run a test.ping (salt -C '* not G@role:stackhead' test.ping)
+````
+
+11) Enforce the installation of hashicorp tools on the minions
+````
+# salt -C '* not G@role:stackhead' state.highstate
+````
+
+12) [work in progress...]
 
 ## Helpful commands 
 * Remove inactive salt minions
