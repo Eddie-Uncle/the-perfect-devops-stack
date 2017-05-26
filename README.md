@@ -4,7 +4,7 @@
 
 ## Preparing the STACK HEAD server
 
-Create a new instance(Centos 7.2 - ami-0ca23e1b) that will serve as our cluster head for terraform, saltstack, nomad and consul
+Create a new instance(Centos 7.2 - ami-0ca23e1b) that will serve as our stack head for terraform, saltstack, nomad and consul
 
 1) Set a hostname to the cluster head
 ````
