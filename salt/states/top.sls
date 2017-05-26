@@ -8,6 +8,6 @@ base:
     - consul
     - consul-template
 
-  'role:nomad'
+  'role:nomad':
     - match: grain
     - nomad
