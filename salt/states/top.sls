@@ -1,4 +1,11 @@
 base:
+  'role:stackhead':
+    - match: grain
+    - terraform
+    - consul
+    - consul-template
+    - nomad
+
   'role:terraform':
     - match: grain
     - terraform

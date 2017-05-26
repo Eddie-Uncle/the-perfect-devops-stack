@@ -46,7 +46,7 @@ resource "aws_instance" "app-01" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/firstboot.sh",
-      "/tmp/firstboot.sh ${var.cluster_head_ip_address}"
+      "/tmp/firstboot.sh ${var.stack_head_ip_address}"
     ]
 
     connection {

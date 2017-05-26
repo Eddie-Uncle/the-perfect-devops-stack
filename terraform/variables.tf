@@ -1,5 +1,5 @@
 # global variables
-variable "cluster_head_ip_address" {}
+variable "stack_head_ip_address" {}
 
 # aws related variables
 variable "aws_access_key" {}

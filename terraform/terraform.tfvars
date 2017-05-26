@@ -1,4 +1,4 @@
-cluster_head_ip_address = "172.31.37.106"
+stack_head_ip_address = "172.31.37.106"
 
 aws_access_key = ""
 aws_secret_key = ""
