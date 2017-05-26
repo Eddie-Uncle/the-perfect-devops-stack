@@ -6,7 +6,7 @@
 
 Create a new instance(Centos 7.2 - ami-0ca23e1b) that will serve as our stack head for terraform, saltstack, nomad and consul
 
-1) Set a hostname to the cluster head
+1) Set a hostname to the stack head serve
 ````
 # echo 'stackhead.local' > /etc/hostname
 
@@ -66,7 +66,7 @@ EOF
 
 ````
 
-6) Add role to the STACK_HEAD and restart the salt-minion
+6) Add role to the stack head server and restart the salt-minion
 ````
 # cat << EOF > /etc/salt/grains
 role:
