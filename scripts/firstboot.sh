@@ -1,6 +1,6 @@
 #!/bin/bash
-
 STACK_HEAD_IP_ADDRESS="$1"
+
 sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 sudo bash -c 'cat << EOF > /etc/yum.repos.d/saltstack.repo
@@ -13,4 +13,6 @@ gpgkey=https://repo.saltstack.com/yum/redhat/\$releasever/\$basearch/latest/SALT
        https://repo.saltstack.com/yum/redhat/\$releasever/\$basearch/latest/base/RPM-GPG-KEY-CentOS-7
 EOF'
 
-sudo yum install salt-minion -y && sudo sed -i s/"#master: salt"/"master: $STACK_HEAD_IP_ADDRESS"/g /etc/salt/minion && sudo systemctl start salt-minion
+sudo echo "$STACK_HEAD_IP_ADDRESS salt" >> /etc/hosts
+
+sudo yum install salt-minion -y && sudo systemctl start salt-minion
