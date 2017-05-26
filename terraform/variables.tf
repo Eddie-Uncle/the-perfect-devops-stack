@@ -1,3 +1,7 @@
+# global variables
+variable "cluster_head_ip_address" {}
+
+# aws related variables
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
 variable "aws_default_key_pairs_name" {}

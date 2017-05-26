@@ -31,9 +31,17 @@ resource "aws_instance" "app-01" {
   key_name = "${var.aws_default_key_pairs_name}"
   vpc_security_group_ids = ["${aws_security_group.sg_generic.id}"]
   depends_on = ["aws_security_group.sg_generic"]
-  provisioner "remote-exec" {
-    script = "../scripts/firstboot.sh"
 
+  provisioner "file" {
+    source = "../scripts/firstboot.sh"
+    destination = "/tmp/firstboot.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/firstboot.sh",
+      "/tmp/firstboot.sh ${var.cluster_head_ip_address}"
+    ]
     connection {
       type = "ssh"
       user = "ec2-user"
