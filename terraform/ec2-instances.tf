@@ -35,6 +35,12 @@ resource "aws_instance" "app-01" {
   provisioner "file" {
     source = "../scripts/firstboot.sh"
     destination = "/tmp/firstboot.sh"
+    
+    connection {
+      type = "ssh"
+      user = "ec2-user"
+      private_key = "${file("../files/aws.pem")}"
+    }
   }
 
   provisioner "remote-exec" {
@@ -42,6 +48,7 @@ resource "aws_instance" "app-01" {
       "chmod +x /tmp/firstboot.sh",
       "/tmp/firstboot.sh ${var.cluster_head_ip_address}"
     ]
+
     connection {
       type = "ssh"
       user = "ec2-user"
