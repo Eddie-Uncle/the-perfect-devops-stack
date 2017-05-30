@@ -1,0 +1,9 @@
+{
+  "datacenter": "{{ datacenter }}",
+  "data_dir": "{{ data_dir }}",
+  {% if is_bootstrap -%}
+  "bootstrap": true,
+  {%- endif %}
+  "server": {{ 'true' if is_server else 'false' }},
+  "log_level": "INFO"
+}

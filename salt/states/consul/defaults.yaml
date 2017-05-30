@@ -2,3 +2,16 @@ consul:
   version: '0.8.3'
   download_host: 'releases.hashicorp.com'
   bin_dir: '/usr/local/bin'
+  conf_dir: '/etc/consul.d'
+  data_dir: '/var/consul'
+ 
+  config:
+    server: false
+    datacenter: "aws-east-1"
+    bind_addr: 0.0.0.0
+    ui: true
+    enable_debug: false
+    log_level: info
+    encrypt: ""
+    retry_join: []
+    retry_interval: 30s

@@ -3,6 +3,7 @@ base:
     - match: grain
     - terraform
     - consul
+    - consul.server
     - consul-template
     - nomad
 
