@@ -13,6 +13,6 @@ gpgkey=https://repo.saltstack.com/yum/redhat/\$releasever/\$basearch/latest/SALT
        https://repo.saltstack.com/yum/redhat/\$releasever/\$basearch/latest/base/RPM-GPG-KEY-CentOS-7
 EOF'
 
-sudo sh -c echo "$STACK_HEAD_IP_ADDRESS salt stackhead" >> /etc/hosts
+sudo sh -c "echo $STACK_HEAD_IP_ADDRESS salt stackhead >> /etc/hosts"
 
 sudo yum install salt-minion -y && sudo systemctl start salt-minion
