@@ -38,6 +38,7 @@ consul-config:
       - user: consul-user
     - template: jinja
     - context:
+      stackhead_ip_address: {{ salt['pillar.get']('consul:stackhead_ip_address')  }}
       is_server: {{ salt['pillar.get']('consul:is_server')  }}
       datacenter: {{ consul.config.datacenter }}
       data_dir: {{ consul.data_dir }}
