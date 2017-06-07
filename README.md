@@ -98,6 +98,8 @@ EOF
   - consul
   - consul-template
   - nomad
+  - docker
+  - registrator
 "
 # salt -C '* not G@role:stackhead' service.restart salt-minion
 The command above will timeout, to test if the minion is up again run a test.ping (salt -C '* not G@role:stackhead' test.ping)
