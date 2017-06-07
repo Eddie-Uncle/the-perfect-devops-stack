@@ -1,0 +1,6 @@
+docker:
+  repourl: 'https://download.docker.com/linux/centos/docker-ce.repo'
+  registry_name: 'registry'
+  registry_image: 'registry:2'  
+  registrator_name: 'registrator'
+  registrator_image: 'gliderlabs/registrator'

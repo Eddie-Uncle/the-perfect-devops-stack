@@ -1,0 +1,13 @@
+{
+  "datacenter": "{{ datacenter }}",
+  "data_dir": "{{ data_dir }}",
+  {% if is_bootstrap -%}
+  "bootstrap": true,
+  {%- else %}
+  "retry_join": [
+      "{{ stackhead_ip_address }}"
+    ],
+  {%- endif %}
+  "server": {{ 'true' if is_server else 'false' }},
+  "log_level": "INFO"
+}
