@@ -1,4 +1,7 @@
 base:
+  '*':
+     - dnsmasq
+
   'role:stackhead':
     - match: grain
     - terraform
