@@ -1,0 +1,8 @@
+{% import_yaml 'dnsmasq/defaults.yaml' as dnsmasq_default_settings %}
+
+{% set dnsmasq = salt['pillar.get'](
+        'dnsmasq',
+        default=dnsmasq_default_settings.dnsmasq,
+        merge=True
+    )
+%}

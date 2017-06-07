@@ -1,0 +1,8 @@
+#local forwarder to consul dns service
+server=/consul/127.0.0.1#8600
+
+# DNS server for non-consul queries
+server={{ forwarder_ip }}
+
+#disable caching
+cache-size=0
