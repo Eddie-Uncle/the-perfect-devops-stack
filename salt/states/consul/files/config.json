@@ -3,6 +3,7 @@
   "data_dir": "{{ data_dir }}",
   {% if is_bootstrap -%}
   "bootstrap": true,
+  "bind_addr": "{{ stackhead_ip_address }}",
   {%- else %}
   "retry_join": [
       "{{ stackhead_ip_address }}"
