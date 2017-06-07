@@ -4,15 +4,22 @@ provider "aws" {
   region     = "${var.aws_primary_region}"
 }
 
-resource "aws_security_group" "sg_generic" {
-  name = "sg_generic"
-  description = "Basic security group"
+resource "aws_security_group" "sg_default" {
+  name = "sg_default"
+  description = "Default security group"
 
   ingress {
-    from_port = 0
+    from_port = 22
     to_port = 22
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port = 1
+    to_port = 65535
+    protocol = "tcp"
+    cidr_blocks = ["172.16.0.0/12"]
   }
 
   egress {
@@ -29,8 +36,8 @@ resource "aws_instance" "app-01" {
   ami           = "${var.aws_default_app_ami_name}"
   instance_type = "${var.aws_default_app_instance_type}"
   key_name = "${var.aws_default_key_pairs_name}"
-  vpc_security_group_ids = ["${aws_security_group.sg_generic.id}"]
-  depends_on = ["aws_security_group.sg_generic"]
+  vpc_security_group_ids = ["${aws_security_group.sg_default.id}"]
+  depends_on = ["aws_security_group.sg_default"]
 
   provisioner "file" {
     source = "../scripts/firstboot.sh"
