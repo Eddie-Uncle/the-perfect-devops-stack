@@ -9,6 +9,7 @@ base:
     - consul.server
     - consul-template
     - nomad
+    - nomad.server
 
   'role:terraform':
     - match: grain
