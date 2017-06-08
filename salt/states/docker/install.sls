@@ -22,3 +22,10 @@ docker-ce:
   pkg.installed:
     - require:
       - cmd: dockerrepo
+
+docker-opts-file:
+  file.managed:
+    - name: /etc/docker/daemon.json
+    - source: salt://docker/files/daemon.json
+    - require:
+      - pkg: docker-ce
