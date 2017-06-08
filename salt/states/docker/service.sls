@@ -7,3 +7,6 @@ docker-service:
     - require:
       - pkg: docker-ce
       - pip: docker-py
+      - file: docker-opts-file
+    - watch:
+      - file: docker-opts-file

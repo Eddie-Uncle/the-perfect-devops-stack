@@ -1,0 +1,3 @@
+{ 
+    "insecure-registries":["stackhead:5000"]
+}
