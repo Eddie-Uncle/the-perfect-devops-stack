@@ -42,13 +42,13 @@ sed -i s/'#auto_accept: False'/'auto_accept: True'/g /etc/salt/master
 cat << EOF >> /etc/salt/master
 file_roots:
     base:
-        - /opt/devops/hashicorpstack-aws-saltstack-docker/salt/states
+        - $WORKDIR/$GIT_REPO/salt/states
 EOF
  
 cat << EOF >> /etc/salt/master
 pillar_roots:
     base:
-        - /opt/devops/hashicorpstack-aws-saltstack-docker/salt/pillars
+        - $WORKDIR/$GIT_REPO/salt/pillars
 EOF
  
 cat << EOF > /etc/salt/grains
