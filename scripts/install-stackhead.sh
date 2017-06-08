@@ -56,8 +56,8 @@ role:
   - stackhead
 EOF
 
+sed -i s/"#master: salt"/"master: $STACKHEAD_HOSTNAME"/g /etc/salt/minion
+ 
+systemctl enable salt-minion salt-master
+
 echo 'Done!'
- 
- sed -i s/"#master: salt"/"master: $STACKHEAD_HOSTNAME"/g /etc/salt/minion
- 
- systemctl enable salt-minion salt-master
