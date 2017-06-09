@@ -31,9 +31,9 @@ resource "aws_security_group" "sg_default" {
 
 }
 
-resource "aws_instance" "app-01" {
-  count = 4
-  key_name = "app-01"
+resource "aws_instance" "app" {
+  count = 1
+  key_name = "app"
   ami           = "${var.aws_default_app_ami_name}"
   instance_type = "${var.aws_default_app_instance_type}"
   key_name = "${var.aws_default_key_pairs_name}"
