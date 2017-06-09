@@ -39,22 +39,22 @@ Create a new instance(Centos 7.2 - ami-0ca23e1b) that will serve as our stack he
 ````
 
 ````
-# git clone https://git@github.com/iarlyy/hashicorpstack-aws-saltstack-docker
+# git clone https://git@github.com/iarlyy/the-perfect-devops-stack
 ````
 
 ````
-# cd hashicorpstack-aws-saltstack-docker
+# cd the-perfect-devops-stack
 ````
 
-3) Generate a key pair and save it to /opt/devops/hashicorpstack-aws-saltstack-docker/files/aws.pem
+3) Generate a key pair and save it to /opt/devops/the-perfect-devops-stack/files/aws.pem
 ````
-# mkdir /opt/devops/hashicorpstack-aws-saltstack-docker/files
+# mkdir /opt/devops/the-perfect-devops-stack/files
 ````
 
 AWS Console -> EC2 -> Key Pairs -> Create new Key Pair
 
 
-4) Generate a new access keys and set the values accordingly on the file /opt/devops/hashicorpstack-aws-saltstack-docker/terraform/terraform.tfvars
+4) Generate a new access keys and set the values accordingly on the file /opt/devops/the-perfect-devops-stack/terraform/terraform.tfvars
 ````
 http://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html
 ````
@@ -85,11 +85,11 @@ EOF
 ````
 
 ````
-# echo -e "file_roots:\n    base:\n      - /opt/devops/hashicorpstack-aws-saltstack-docker/salt/states" >> /etc/salt/master
+# echo -e "file_roots:\n    base:\n      - /opt/devops/the-perfect-devops-stack/salt/states" >> /etc/salt/master
 ````
 
 ````
-# echo -e "pillar_roots:\n    base:\n      - /opt/devops/hashicorpstack-aws-saltstack-docker/salt/pillars" >> /etc/salt/master
+# echo -e "pillar_roots:\n    base:\n      - /opt/devops/the-perfect-devops-stack/salt/pillars" >> /etc/salt/master
 ````
 
 ````
@@ -120,7 +120,7 @@ EOF
 
 8) Terraform apply
 ````
-# cd /opt/devops/hashicorpstack-aws-saltstack-docker/terraform
+# cd /opt/devops/the-perfect-devops-stack/terraform
 ````
 
 ````
