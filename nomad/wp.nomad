@@ -1,4 +1,4 @@
-job "wp-dev" {
+job "wp" {
   region = "global"
 
   datacenters = ["aws-east-1"]
@@ -14,7 +14,7 @@ job "wp-dev" {
   }
 
   group "wp-dev" {
-    count = 20
+    count = 1
     restart {
       attempts = 10
       interval = "5m"
@@ -26,20 +26,26 @@ job "wp-dev" {
       driver = "docker"
 
       config {
+        image = "stackhead:5000/phpfpm:0.1"
         volumes = [
-          "/opt/${NOMAD_JOB_NAME}/:/var/www/html",
+          "/mnt/efs/${NOMAD_TASK_NAME}/:/var/www/html/web",
         ]
-        image = "php:5.6-fpm"
+
+        network_mode = "bridge"
+        port_map {
+          fpm = 9000
+        }
       }
 
       resources {
+        memory = 384
         network {
           port "fpm" {}
         }
       }
 
       service {
-        name = "php-app"
+        name = "wp-dev"
         port = "fpm"
         check {
           name     = "alive"
