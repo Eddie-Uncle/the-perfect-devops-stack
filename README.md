@@ -1,6 +1,12 @@
-# Perfect DevOps stack (hashicorp tools[terraform, nomad, consul] + saltstack + docker)
+# The Perfect DevOps Stack 
+### (work in progress, stay tuned)
 
-### [WORK IN PROGRESS, STAY TUNED]
+### Tools used
++ Terraform (Cloud provisioner)
++ Saltstack (Configuration management system)
++ Docker (Application runtime) 
++ Consul (Service discovery)
++ Nomad (Containers/Cluster scheduler)
 
 ## Preparing the STACK HEAD server
 
