@@ -4,6 +4,8 @@
   {% if is_bootstrap -%}
   "bootstrap": true,
   "bind_addr": "{{ stackhead_ip_address }}",
+  "ui": true,
+  "client_addr": "0.0.0.0",
   {%- else %}
   "retry_join": [
       "{{ stackhead_ip_address }}"
