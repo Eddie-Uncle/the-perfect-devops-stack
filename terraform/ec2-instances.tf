@@ -45,7 +45,9 @@ resource "aws_security_group" "sg_default_web" {
 
 resource "aws_instance" "app" {
   count = 1
-  key_name = "app"
+  tags {
+    Name = "app-${count.index}"
+  }
   ami           = "${var.aws_default_app_ami_name}"
   instance_type = "${var.aws_default_app_instance_type}"
   key_name = "${var.aws_default_key_pairs_name}"
@@ -80,7 +82,9 @@ resource "aws_instance" "app" {
 
 resource "aws_instance" "web" {
   count = 1
-  key_name = "web"
+  tags {
+    Name = "web-${count.index}"
+  }
   ami           = "${var.aws_default_app_ami_name}"
   instance_type = "${var.aws_default_app_instance_type}"
   key_name = "${var.aws_default_key_pairs_name}"
