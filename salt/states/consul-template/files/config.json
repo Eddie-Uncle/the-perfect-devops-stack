@@ -1,0 +1,12 @@
+log_level = "info"
+wait {
+  min = "5s"
+  max = "10s"
+}
+{% for t in templates %}
+template {
+  source = "{{ consul_template.conf_dir }}/templates/{{ t.job_id }}.ctmpl"
+  destination = "{{ t.destination }}"
+  command = "{{ t.command }}"
+}
+{% endfor -%}

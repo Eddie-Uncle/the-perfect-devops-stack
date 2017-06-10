@@ -1,4 +1,5 @@
 consul_template:
+  conf_dir: '/etc/consul-template.d'
   version: '0.18.5'
   download_host: 'releases.hashicorp.com'
   bin_dir: '/usr/local/bin'

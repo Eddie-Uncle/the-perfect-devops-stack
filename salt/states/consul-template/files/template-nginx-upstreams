@@ -1,0 +1,5 @@
+# {{ job_id }}
+upstream {{ job_id }} {
+{% raw %}{{ {% endraw %} range service "{{ job_id }}" {% raw %} }} {% endraw %}
+	server {% raw %}{{ .Address }}:{{ .Port }};{{ end }}{% endraw %}
+}
