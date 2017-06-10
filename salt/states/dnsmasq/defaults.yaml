@@ -1,5 +1,2 @@
 dnsmasq:
   conf_file: '/etc/dnsmasq.d/10-consul'
- 
-  config:
-    forwarder: "8.8.8.8"
