@@ -86,7 +86,8 @@ stackhead_ip_address: '172.X.Y.Z'
 
 9) Assign role to all newly created instances and restart salt-minion
 ````
-# salt -C '* not G@role:stackhead' file.write /etc/salt/grains "role:
+# salt -G 'role:norole' file.write /etc/salt/grains "role:
+  - app
   - consul
   - consul-template
   - nomad
@@ -96,22 +97,22 @@ stackhead_ip_address: '172.X.Y.Z'
 ````
 
 ````
-# salt -C '* not G@role:stackhead' service.restart salt-minion
+# salt -G 'role:norole' service.restart salt-minion
 ````
 The command above will timeout, to test if the minion is up again run a test.ping
 
 ````
-salt -C '* not G@role:stackhead' test.ping
+salt -G 'role:app' test.ping
 ````
 
 10) Push the installation of the application servers
 ````
-# salt -C '* not G@role:stackhead' state.highstate
+# salt -G 'role:app' state.highstate
 ````
 
 11) Build a sample php-fpm docker image
 ````
-# cd docker/phpfpm
+# cd ../docker/phpfpm
 ````
 
 ````
