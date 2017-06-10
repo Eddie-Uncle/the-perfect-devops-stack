@@ -89,7 +89,6 @@ stackhead_ip_address: '172.X.Y.Z'
 # salt -G 'role:app' file.write /etc/salt/grains "role:
   - app
   - consul
-  - consul-template
   - nomad
   - docker
   - registrator
