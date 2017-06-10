@@ -11,6 +11,10 @@ base:
     - docker
     - docker.registry
 
+  'role:web':
+    - match: grain
+    - consul-template.nginx
+
   'role:terraform':
     - match: grain
     - terraform
