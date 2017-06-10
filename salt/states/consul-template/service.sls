@@ -26,6 +26,16 @@ consul-template-systemd-file:
     - name: /etc/systemd/system/consul-template.service
     - mode: 0644
 
+{% for f in consul_template.templates %}
+template-{{ f.job_id }}:
+  file.managed:
+      - name: {{ consul_template.conf_dir }}/templates/{{ f.job_id }}.ctmpl
+      - source: salt://consul-template/files/template-nginx-upstreams
+      - template: jinja
+      - context:
+          job_id: {{ f.job_id }}
+{% endfor %}
+
 consul-template-service:
   service.running:
     - name: consul-template

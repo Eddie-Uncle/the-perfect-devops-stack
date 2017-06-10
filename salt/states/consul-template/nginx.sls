@@ -24,20 +24,9 @@ nginx-yum-conf:
     - require:
         - pkg: nginx-pkg
 
-{% for f in consul_template.templates %}
-template-{{ f.job_id }}:
-  file.managed:
-      - name: {{ consul_template.conf_dir }}/templates/{{ f.job_id }}.ctmpl
-      - source: salt://consul-template/files/template-nginx-upstreams
-      - template: jinja
-      - context:
-          job_id: {{ f.job_id }}
-{% endfor %}
-
 nginx-service:
   service.running:
     - name: nginx
     - enable: True
     - watch:
         - file: nginx-yum-conf
-        - file: {{ consul_template.conf_dir }}/templates/*.ctmpl
