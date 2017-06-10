@@ -2,4 +2,5 @@
 upstream {{ job_id }} {
 {% raw %}{{ {% endraw %} range service "{{ job_id }}" {% raw %} }} {% endraw %}
 	server {% raw %}{{ .Address }}:{{ .Port }};{{ end }}{% endraw %}
+	server 127.0.0.1:8080 down;
 }
