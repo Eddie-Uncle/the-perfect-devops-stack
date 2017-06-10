@@ -1,10 +1,9 @@
 #!/bin/bash
 
 STACKHEAD_HOSTNAME="stackhead"
-STACKHEAD_IPADDR=`ip -4 addr show dev eth0|grep inet | cut -d" " -f6|sed s/\\/.*//g`
+STACKHEAD_IPADDR=`ip -4 addr show dev eth0| grep inet |awk '{print $2}' | cut -d'/' -f1`
 WORKDIR="/opt/devops"
 GIT_REPO="the-perfect-devops-stack"
-
 # Setting up yum repositories
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
