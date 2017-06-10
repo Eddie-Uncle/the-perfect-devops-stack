@@ -66,7 +66,7 @@ resource "aws_instance" "app" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/firstboot.sh",
-      "/tmp/firstboot.sh ${var.stack_head_ip_address} norole"
+      "/tmp/firstboot.sh ${var.stack_head_ip_address} app"
     ]
 
     connection {
