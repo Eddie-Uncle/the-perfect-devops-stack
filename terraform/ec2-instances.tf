@@ -6,7 +6,7 @@ provider "aws" {
 
 resource "aws_security_group" "sg_default" {
   name = "sg_default"
-  description = "Default security group"
+  description = "Managed by terraform"
 
   ingress {
     from_port = 22
@@ -29,6 +29,18 @@ resource "aws_security_group" "sg_default" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+}
+
+resource "aws_security_group" "sg_default_web" {
+  name = "sg_default_web"
+  description = "Managed by terraform"
+
+  ingress {
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_instance" "app" {
@@ -54,7 +66,7 @@ resource "aws_instance" "app" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/firstboot.sh",
-      "/tmp/firstboot.sh ${var.stack_head_ip_address}"
+      "/tmp/firstboot.sh ${var.stack_head_ip_address} norole"
     ]
 
     connection {
@@ -64,3 +76,39 @@ resource "aws_instance" "app" {
     }
   }
 }
+
+
+resource "aws_instance" "web" {
+  count = 1
+  key_name = "web"
+  ami           = "${var.aws_default_app_ami_name}"
+  instance_type = "${var.aws_default_app_instance_type}"
+  key_name = "${var.aws_default_key_pairs_name}"
+  vpc_security_group_ids = ["${aws_security_group.sg_default.id}", "${aws_security_group.sg_default_web.id}"]
+  depends_on = ["aws_security_group.sg_default","aws_security_group.sg_default_web"]
+
+  provisioner "file" {
+    source = "../scripts/firstboot.sh"
+    destination = "/tmp/firstboot.sh"
+    
+    connection {
+      type = "ssh"
+      user = "ec2-user"
+      private_key = "${file("../files/aws.pem")}"
+    }
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/firstboot.sh",
+      "/tmp/firstboot.sh ${var.stack_head_ip_address} web"
+    ]
+
+    connection {
+      type = "ssh"
+      user = "ec2-user"
+      private_key = "${file("../files/aws.pem")}"
+    }
+  }
+}
+
