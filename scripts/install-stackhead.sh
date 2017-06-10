@@ -2,8 +2,8 @@
 
 STACKHEAD_HOSTNAME="stackhead"
 STACKHEAD_IPADDR=`ip -4 addr show dev eth0|grep inet | cut -d" " -f6|sed s/\\/.*//g`
-GIT_REPO="https://git@github.com/iarlyy/hashicorpstack-aws-saltstack-docker"
 WORKDIR="/opt/devops"
+GIT_REPO="the-perfect-devops-stack"
 
 # Setting up yum repositories
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -26,15 +26,10 @@ hostname $(cat /etc/hostname)
 
 echo "$STACKHEAD_IPADDR $STACKHEAD_HOSTNAME" >> /etc/hosts
 
-# Setting up working directory
-mkdir $WORKDIR
-
 # Installing packages
-yum -y install salt salt-minion git
+yum -y install salt-master salt-minion
 
-# Cloning repo
-cd $WORKDIR
-git clone $GIT_REPO
+# Preparing salt
 
 # Setting up saltmaster
 sed -i s/'#auto_accept: False'/'auto_accept: True'/g /etc/salt/master
