@@ -6,7 +6,6 @@ base:
     - match: grain
     - terraform
     - consul
-    - consul-template
     - nomad
     - docker
     - docker.registry
