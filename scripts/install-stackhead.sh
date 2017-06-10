@@ -23,7 +23,7 @@ echo "$STACKHEAD_HOSTNAME" > /etc/hostname
 
 hostname $(cat /etc/hostname)
 
-echo "$STACKHEAD_IPADDR $STACKHEAD_HOSTNAME" >> /etc/hosts
+echo "$STACKHEAD_IPADDR $STACKHEAD_HOSTNAME salt" >> /etc/hosts
 
 # Installing packages
 yum -y install salt-master salt-minion
@@ -50,8 +50,6 @@ role:
   - stackhead
 EOF
 
-sed -i s/"#master: salt"/"master: $STACKHEAD_HOSTNAME"/g /etc/salt/minion
- 
 systemctl enable salt-minion salt-master
 
 echo 'Done!'
