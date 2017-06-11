@@ -160,11 +160,15 @@ At this point you should have a nginx server returning its default blank page an
 ## Scaling up/down
 
 1) Terraform
-File: terraform/ec2-instances.tf
+
+* File: terraform/ec2-instances.tf
+
 Change the "count" value of the instances (default: 1). Repeat the steps 3-4 every time a new app instaces are deployed and steps 7-8 every time a new web instance is deployed.
 
 2) Docker containers
-File: nomad/wp.nomad
+
+* File: nomad/wp.nomad
+
 Change the "count" value of the desired group you want to deploy more containers and run nomad again (step 6). Nomad and Consul-template will take care of the rest.
 
 3) What else should i add here?...
