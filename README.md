@@ -55,6 +55,7 @@ aws_secret_key = "K0Vk6STRNu..."
 How to generate access keys: http://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html
 
 5) Ajust the stackhead IP address to both consul and nomad salt pillars
+
 vi salt/pillars/consul/init.sls
 ````
 stackhead_ip_address: '172.X.Y.Z'
