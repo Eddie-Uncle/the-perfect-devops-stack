@@ -4,7 +4,7 @@
 Guide to implement automated deployment/delivering of PHP application using cutting edge tools
 
 ### Tools used
-+ Terraform (Cloud provisioner)
++ Terraform (Cloud provisioner - GCE coming soon)
 + Saltstack (Configuration management system)
 + Docker (Application runtime)
 + Consul (Service discovery)
